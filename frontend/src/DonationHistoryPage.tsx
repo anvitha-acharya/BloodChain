@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from './App'; // Assuming Card is exported
+import { Card } from './components/UI/Card';
 
 const mockDonationHistory = [
   { id: 'd001', date: '2024-12-10', location: 'City Hospital Center', pointsEarned: 50, status: 'Completed' },
@@ -18,8 +18,8 @@ const badgeLevels = [
   { points: 500, name: 'Platinum Donor', icon: '💎' },
 ];
 
-const getCurrentBadge = (points) => {
-  let currentBadge = { name: 'New Donor', icon: '🩸' }; // Default for new donors
+const getCurrentBadge = (points: number) => {
+  let currentBadge = { name: 'New Donor', icon: '🩸' };
   for (let i = badgeLevels.length - 1; i >= 0; i--) {
     if (points >= badgeLevels[i].points) {
       currentBadge = badgeLevels[i];

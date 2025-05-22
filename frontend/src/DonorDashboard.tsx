@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from './App'; // Assuming Card is exported from App.tsx or a components file
+import { Card } from './components/UI/Card';
 
 const mockDonorData = {
   name: "John Doe",
@@ -9,7 +9,13 @@ const mockDonorData = {
   bloodType: "O+",
 };
 
-const StatCard = ({ title, value, unit }) => (
+interface StatCardProps {
+  title: string;
+  value: string | number;
+  unit?: string;
+}
+
+const StatCard: React.FC<StatCardProps> = ({ title, value, unit }) => (
   <div style={{
     background: 'var(--primary)',
     color: 'white',
@@ -43,7 +49,6 @@ export default function DonorDashboard() {
       <Card style={{ marginBottom: '2rem' }}>
         <h2 style={{ color: 'var(--primary)', marginBottom: '1rem' }}>Quick Actions</h2>
         <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-          {/* These buttons would ideally be Link components from react-router-dom */}
           <button className="btn">Schedule New Donation</button>
           <button className="btn">View Donation History</button>
           <button className="btn">Explore Rewards</button>
@@ -52,7 +57,6 @@ export default function DonorDashboard() {
 
       <Card>
         <h2 style={{ color: 'var(--primary)', marginBottom: '1rem' }}>Recent Activity</h2>
-        {/* Placeholder for recent activity feed or notifications */}
         <p>No recent activity to display.</p>
         <p style={{marginTop: '1rem', fontSize: '0.9rem', color: '#666'}}>
             Your contributions are vital. Thank you for being a lifesaver!

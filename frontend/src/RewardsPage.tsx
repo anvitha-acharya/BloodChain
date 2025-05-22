@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
-import { Card } from './App'; // Assuming Card is exported
+import { Card } from './components/UI/Card';
 
-const mockUserPoints = 250; // Current points, should come from user data
+const mockUserPoints = 250;
 
-const mockRewardsCatalog = [
+interface Reward {
+  id: string;
+  name: string;
+  pointsRequired: number;
+  icon: string;
+}
+
+const mockRewardsCatalog: Reward[] = [
   { id: 'r001', name: 'Movie Ticket Voucher', pointsRequired: 100, icon: '🎟️' },
   { id: 'r002', name: 'Cafe Coffee Coupon', pointsRequired: 150, icon: '☕' },
   { id: 'r003', name: 'Online Course Discount (10%)', pointsRequired: 200, icon: '🎓' },
@@ -14,14 +21,13 @@ const mockRewardsCatalog = [
 
 export default function RewardsPage() {
   const [userPoints, setUserPoints] = useState(mockUserPoints);
-  const [redeemedItems, setRedeemedItems] = useState([]);
+  const [redeemedItems, setRedeemedItems] = useState<Reward[]>([]);
 
-  const handleRedeem = (reward) => {
+  const handleRedeem = (reward: Reward) => {
     if (userPoints >= reward.pointsRequired) {
       setUserPoints(userPoints - reward.pointsRequired);
       setRedeemedItems([...redeemedItems, reward]);
       alert(`Successfully redeemed ${reward.name}!`);
-      // In a real app, this would also update the backend
     } else {
       alert("You don't have enough points to redeem this item.");
     }
@@ -45,7 +51,7 @@ export default function RewardsPage() {
       <h2 style={{ color: '#555', marginBottom: '1.5rem', fontSize: '1.4rem' }}>Redeem Your Points:</h2>
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', // Responsive grid
+        gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
         gap: '1.5rem'
       }}>
         {mockRewardsCatalog.map((reward) => (

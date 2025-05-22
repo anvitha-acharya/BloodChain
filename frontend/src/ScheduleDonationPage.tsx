@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
-import { Card } from './App'; // Assuming Card is exported from App.tsx or a components file
+import { Card } from './components/UI/Card';
 
-// Mock available slots (in a real app, this would come from an API)
-const availableSlots = [
+interface TimeSlot {
+  date: string;
+  time: string;
+  location: string;
+}
+
+const availableSlots: TimeSlot[] = [
   { date: '2025-06-10', time: '10:00 AM', location: 'City Hospital Center' },
   { date: '2025-06-10', time: '02:00 PM', location: 'Community Blood Drive' },
   { date: '2025-06-12', time: '09:00 AM', location: 'Red Cross Center' },
@@ -11,18 +16,17 @@ const availableSlots = [
 ];
 
 export default function ScheduleDonationPage() {
-  const [selectedSlot, setSelectedSlot] = useState(null);
+  const [selectedSlot, setSelectedSlot] = useState<TimeSlot | null>(null);
   const [isConfirmed, setIsConfirmed] = useState(false);
 
-  const handleSlotSelect = (slot) => {
+  const handleSlotSelect = (slot: TimeSlot) => {
     setSelectedSlot(slot);
-    setIsConfirmed(false); // Reset confirmation if a new slot is selected
+    setIsConfirmed(false);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (selectedSlot) {
-      // Simulate booking confirmation
       setIsConfirmed(true);
       alert(`Donation scheduled for ${selectedSlot.date} at ${selectedSlot.time} at ${selectedSlot.location}.`);
     } else {
